@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>StepZero — from "now what?" to your first move</title>
+<style>
+  :root{
+    --ink:#0d1117;
+    --paper:#f4efe6;
+    --line:#e0d7c6;
+    --accent:#ff5c3a;
+    --accent2:#1a6d5e;
+    --muted:#7a7261;
+    --card:#fffdf8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Georgia","Times New Roman",serif;
+    background:
+      radial-gradient(1200px 600px at 85% -10%, #ffe6de 0%, transparent 55%),
+      radial-gradient(1000px 700px at -10% 110%, #d6 efe6 0%, transparent 50%),
+      var(--paper);
+    color:var(--ink);
+    min-height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:28px 16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .phone{
+    width:100%;
+    max-width:430px;
+    background:var(--card);
+    border-radius:34px;
+    box-shadow:0 40px 80px -30px rgba(13,17,23,.45), 0 0 0 1px var(--line);
+    overflow:hidden;
+    position:relative;
+  }
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 22px 4px;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  }
+  .brand{display:flex;align-items:baseline;gap:8px;padding:6px 22px 0}
+  .brand .mark{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-weight:800;font-size:26px;letter-spacing:-.03em;color:var(--ink);
+  }
+  .brand .mark b{color:var(--accent)}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--accent2);align-self:center}
+  .pitch{
+    padding:10px 22px 18px;
+    font-size:27px;line-height:1.18;font-weight:400;letter-spacing:-.01em;
+  }
+  .pitch em{font-style:italic;color:var(--accent)}
+  .idea{
+    margin:0 22px 16px;
+    background:linear-gradient(180deg,#fff,#fbf6ec);
+    border:1px solid var(--line);
+    border-radius:16px;padding:14px 16px;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+  }
+  .idea .lbl{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .idea .txt{font-size:15px;margin-top:5px;color:#3a3527;font-style:italic;font-family:Georgia,serif}
+  .roadmap{padding:2px 18px 8px}
+  .step{
+    display:flex;gap:14px;align-items:flex-start;
+    padding:13px 12px;border-radius:14px;position:relative;
+    cursor:pointer;transition:background .18s, transform .18s;
+  }
+  .step:hover{background:#fbf4ea}
+  .step .num{
+    flex:0 0 34px;height:34px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Helvetica Neue",Arial,sans-serif;font-weight:800;font-size:14px;
+    border:2px solid var(--line);color:var(--muted);background:#fff;
+    transition:all .2s;
+  }
+  .step .body h3{font-family:"Helvetica Neue",Arial,sans-serif;font-size:15px;letter-spacing:-.01em}
+  .step .body p{font-size:13px;color:var(--muted);margin-top:3px;line-height:1.35}
+  .step:not(:last-child)::after{
+    content:"";position:absolute;left:29px;top:47px;bottom:-4px;width:2px;background:var(--line);
+  }
+  .step.done .num{background:var(--accent2);border-color:var(--accent2);color:#fff}
+  .step.active .num{background:var(--accent);border-color:var(--accent);color:#fff;
+    box-shadow:0 0 0 5px rgba(255,92,58,.15)}
+  .step.active{background:#fff5f1}
+  .tag{
+    display:inline-block;margin-top:6px;font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+    padding:3px 8px;border-radius:20px;background:#efe7d6;color:#6b6350;
+  }
+  .cta{padding:8px 22px 26px}
+  .btn{
+    width:100%;border:none;cursor:pointer;
+    font-family:"Helvetica Neue",Arial,sans-serif;font-weight:700;font-size:16px;letter-spacing:.01em;
+    color:#fff;padding:17px;border-radius:16px;
+    background:linear-gradient(120deg,var(--accent),#ff8055);
+    box-shadow:0 14px 26px -10px rgba(255,92,58,.7);
+    transition:transform .12s, box-shadow .2s;
+  }
+  .btn:active{transform:translateY(2px);box-shadow:0 6px 14px -8px rgba(255,92,58,.7)}
+  .hint{text-align:center;font-family:"Helvetica Neue",Arial,sans-serif;font-size:11px;color:var(--muted);margin-top:10px}
+</style>
+</head>
+<body>
+  <div class="phone">
+    <div class="topbar"><span>9:41</span><span>Your first move</span></div>
+    <div class="brand">
+      <span class="dot"></span>
+      <span class="mark">Step<b>Zero</b></span>
+    </div>
+    <h1 class="pitch">You have the idea. We hand you the <em>very next step</em> — no guessing.</h1>
+
+    <div class="idea">
+      <div class="lbl">Your idea</div>
+      <div class="txt">"a foldable travel mug that clips to a backpack"</div>
+    </div>
+
+    <div class="roadmap" id="roadmap">
+      <div class="step active">
+        <div class="num">1</div>
+        <div class="body">
+          <h3>Sketch &amp; nail the spec</h3>
+          <p>One page: what it does, who it's for, the must-have detail. Do this before anyone else touches it.</p>
+          <span class="tag">Do this now · ~2 hrs</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <div class="body">
+          <h3>Validate demand — cheaply</h3>
+          <p>Landing page + 20 conversations. Proof beats a factory quote you can't use yet.</p>
+          <span class="tag">Before manufacturers</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <div class="body">
+          <h3>THEN contact manufacturers</h3>
+          <p>Yes — now. We draft the RFQ and shortlist 5 makers who do your material.</p>
+          <span class="tag">This is the part you're asking about</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <div class="body">
+          <h3>Prototype &amp; price it</h3>
+          <p>First sample, unit cost, margin math. Now you know if it's a business.</p>
+          <span class="tag">Week 3–5</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta">
+      <button class="btn" id="advance">Mark done → reveal my next move</button>
+      <div class="hint" id="hint">Tap a step, or let StepZero walk you forward</div>
+    </div>
+  </div>
+
+<script>
+  const steps = Array.from(document.querySelectorAll('.step'));
+  const hint = document.getElementById('hint');
+  const btn = document.getElementById('advance');
+  let active = 0;
+
+  function render(){
+    steps.forEach((s,i)=>{
+      s.classList.toggle('done', i<active);
+      s.classList.toggle('active', i===active);
+    });
+  }
+  function focusStep(i){ active=i; render();
+    hint.textContent = 'Focused: “'+steps[i].querySelector('h3').textContent+'”';
+  }
+  steps.forEach((s,i)=>s.addEventListener('click',()=>focusStep(i)));
+
+  btn.addEventListener('click',()=>{
+    if(active < steps.length-1){
+      active++;
+      render();
+      hint.textContent = 'Nice — next up: “'+steps[active].querySelector('h3').textContent+'”';
+    } else {
+      steps.forEach(s=>{s.classList.add('done');s.classList.remove('active');});
+      btn.textContent = '🎉 Roadmap complete — go build it';
+      hint.textContent = 'You knew the order all along. Now you have it in writing.';
+    }
+  });
+  render();
+</script>
+</body>
+</html>
